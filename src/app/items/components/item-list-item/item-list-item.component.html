@@ -1,1 +1,9 @@
-<p>item-list-item works!</p>
+<mat-card>
+  <mat-card-title>{{item.title}}</mat-card-title>
+  <mat-card-subtitle>{{item.price | currency}}</mat-card-subtitle>
+  <mat-card-actions align="end">
+    <button mat-button (click)="addItemToCart()">
+      <mat-icon class="mat-accent">shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

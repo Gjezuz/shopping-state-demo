@@ -1,1 +1,5 @@
-<p>item-list works!</p>
+<mat-grid-list cols="2" rowHeight="9rem">
+  <mat-grid-tile *ngFor="let item of items$ | async">
+    <app-item-list-item [item]="item"></app-item-list-item>
+  </mat-grid-tile>
+</mat-grid-list>

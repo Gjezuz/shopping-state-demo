@@ -1,0 +1,15 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.title {
+  cursor: pointer;
+}
+
+mat-drawer-container {
+  height: calc(100% - 64px);
+}
+
+.container {
+  margin: 2rem;
+}

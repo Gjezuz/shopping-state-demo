@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CartService} from "./user/service/cart.service";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shopping-state-demo';
+
+  openCart = false;
+
+  constructor(private cartService: CartService) {
+  }
+
+  getCurrentCartItems() {
+    const itemCount = this.cartService.getItems().length;
+    return itemCount > 0 ? itemCount : '';
+  }
 }
