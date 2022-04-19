@@ -13,6 +13,6 @@
       <b>Total Cost:</b>
       <b>{{getTotalCost() | currency}}</b>
     </div>
-    <button mat-raised-button color="accent" [disabled]="getCart().length === 0">Checkout</button>
+    <button mat-raised-button color="accent" [disabled]="getCart().length === 0" [routerLink]="'/user/checkout'">Checkout</button>
   </div>
 </div>

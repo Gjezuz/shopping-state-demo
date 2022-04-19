@@ -1,0 +1,28 @@
+.container {
+  width: 50%;
+  margin: 0 25%;
+}
+
+.actions {
+  button {
+    width: 50%;
+  }
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+.cost {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+mat-card {
+  display: flex;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+

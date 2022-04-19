@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-primary">
   <span routerLink="" class="title">Shopping App</span>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="openCart = !openCart">
+  <button *ngIf="!checkout" mat-icon-button (click)="openCart = !openCart">
     <mat-icon [matBadge]="getCurrentCartItems()" matBadgeColor="accent">shopping_cart</mat-icon>
   </button>
 </mat-toolbar>
@@ -11,7 +11,7 @@
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>
-  <mat-drawer mode="side" [opened]="openCart" position="end">
+  <mat-drawer mode="side" [opened]="openCart && !checkout" position="end">
     <app-cart-preview></app-cart-preview>
   </mat-drawer>
 </mat-drawer-container>
