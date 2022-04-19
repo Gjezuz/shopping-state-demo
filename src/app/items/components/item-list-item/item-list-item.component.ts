@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ShoppingItem} from "../../model/item.interface";
 import {CartService} from "../../../user/service/cart.service";
+import {Item} from "../../state/item.model";
 
 @Component({
   selector: 'app-item-list-item',
@@ -9,7 +9,7 @@ import {CartService} from "../../../user/service/cart.service";
 })
 export class ItemListItemComponent implements OnInit {
 
-  @Input() item!: ShoppingItem;
+  @Input() item!: Item;
 
   constructor(
     private cartService: CartService

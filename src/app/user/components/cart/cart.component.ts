@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../service/cart.service";
-import {ShoppingItem} from "../../../items/model/item.interface";
+import {Item} from "../../../items/state/item.model";
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,7 @@ import {ShoppingItem} from "../../../items/model/item.interface";
 })
 export class CartComponent implements OnInit {
 
-  cartItems!: ShoppingItem[];
+  cartItems!: Item[];
   cartPrice!: number;
 
   constructor(
@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
     this.cartPrice = this.cartService.getCostOfCart();
   }
 
-  removeItemFromCart(item: ShoppingItem) {
+  removeItemFromCart(item: Item) {
     this.cartService.remove(item);
   }
 

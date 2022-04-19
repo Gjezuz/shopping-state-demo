@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../service/cart.service";
-import {ShoppingItem} from "../../../items/model/item.interface";
+import {Item} from "../../../items/state/item.model";
 
 @Component({
   selector: 'app-cart-preview',
@@ -20,7 +20,7 @@ export class CartPreviewComponent implements OnInit {
     return this.cartService.getItems();
   }
 
-  removeItemFromCart(item: ShoppingItem) {
+  removeItemFromCart(item: Item) {
     this.cartService.remove(item);
   }
 

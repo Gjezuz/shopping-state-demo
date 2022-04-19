@@ -12,6 +12,8 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import {ItemsMockService} from "./mock/items-mock.service";
 import {HttpClientModule} from "@angular/common/http";
 import {UserModule} from "./user/user.module";
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {UserModule} from "./user/user.module";
       ItemsMockService, { dataEncapsulation: false }
     ),
     HttpClientModule,
-    UserModule
+    UserModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

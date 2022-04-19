@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import {ShoppingItem} from "../../items/model/item.interface";
+import {Injectable} from '@angular/core';
+import {Item} from "../../items/state/item.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  cart: ShoppingItem[] = [];
+  cart: Item[] = [];
 
   constructor() { }
 
-  addItem(item: ShoppingItem) {
+  addItem(item: Item) {
     this.cart.push(item);
   }
 
@@ -18,7 +18,7 @@ export class CartService {
     return this.cart;
   }
 
-  remove(item: ShoppingItem) {
+  remove(item: Item) {
     this.cart.splice(this.cart.indexOf(item), 1);
   }
 

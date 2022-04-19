@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ItemService} from "../../service/item.service";
 import {Observable} from "rxjs";
-import {ShoppingItem} from "../../model/item.interface";
+import {Item} from "../../state/item.model";
+import {ItemsService} from "../../state/items.service";
+
 
 @Component({
   selector: 'app-item-list',
@@ -10,14 +11,14 @@ import {ShoppingItem} from "../../model/item.interface";
 })
 export class ItemListComponent implements OnInit {
 
-  items$!: Observable<ShoppingItem[]>;
+  items$!: Observable<Item[]>;
 
   constructor(
-    private itemService: ItemService
+    private itemsService: ItemsService
   ) { }
 
   ngOnInit(): void {
-    this.items$ = this.itemService.getItems();
+    this.items$ = this.itemsService.get();
   }
 
 }

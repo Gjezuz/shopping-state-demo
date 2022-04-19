@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from "angular-in-memory-web-api";
-import {ShoppingItem} from "../items/model/item.interface";
+import {Item} from "../items/state/item.model";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {ShoppingItem} from "../items/model/item.interface";
 export class ItemsMockService implements InMemoryDbService {
 
   createDb() {
-    const items: ShoppingItem[] = [
+    const items: Item[] = [
       {
         id: 1,
         title: 'Socks',
