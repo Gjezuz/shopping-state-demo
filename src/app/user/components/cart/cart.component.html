@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isItemListLoaded()">
   <mat-card *ngFor="let cartItem of cartItems$ | async">
     <div>{{getPreviewText(getCartItemDetails(cartItem.itemId) | async, cartItem.amount)}}</div>
     <button mat-icon-button (click)="removeItemFromCart(cartItem.itemId)">

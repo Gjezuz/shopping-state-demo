@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, RouterEvent} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 import {CartQuery} from "./user/state/cart.query";
 import {map} from "rxjs";
+import {ItemsQuery} from "./items/state/items.query";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit{
   checkout = false;
 
   constructor(
+    private itemsQuery: ItemsQuery,
     private cartQuery: CartQuery,
     private router: Router) {
   }
@@ -40,5 +42,9 @@ export class AppComponent implements OnInit{
       }
       return count > 0 ? count : '';
     }));
+  }
+
+  isItemListLoaded() {
+    return this.itemsQuery.getCount() > 0;
   }
 }

@@ -1,7 +1,8 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {CartStore} from './cart.store';
 import {CartQuery} from "./cart.query";
+import {PersistState} from "@datorama/akita";
 
 @Injectable({providedIn: 'root'})
 export class CartService {
@@ -9,9 +10,10 @@ export class CartService {
   constructor(
     private cartStore: CartStore,
     private http: HttpClient,
-    private cartQuery: CartQuery
+    private cartQuery: CartQuery,
+    @Inject('persistStorage') private persistStorage: PersistState,
   ) {
-    this.cartStore.set([]);
+    //this.cartStore.set([]);
   }
 
   addItem(itemId: number) {
@@ -43,6 +45,10 @@ export class CartService {
       };
       this.cartStore.upsert(itemId, currentAmount);
     }
+  }
+
+  clearStorage() {
+    this.persistStorage.clearStore('cart')
   }
 
 }

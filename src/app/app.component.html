@@ -11,7 +11,8 @@
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>
-  <mat-drawer mode="side" [opened]="openCart && !checkout" position="end">
-    <app-cart-preview></app-cart-preview>
+  <mat-drawer mode="side" [opened]="openCart && !checkout && isItemListLoaded()" position="end">
+    <!-- Only show, when items are loaded, or else get errors due to not existing references -->
+    <app-cart-preview *ngIf="isItemListLoaded()"></app-cart-preview>
   </mat-drawer>
 </mat-drawer-container>
