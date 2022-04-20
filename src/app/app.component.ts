@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CartService} from "./user/service/cart.service";
 import {NavigationEnd, Router, RouterEvent} from "@angular/router";
+import {CartQuery} from "./user/state/cart.query";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit{
   checkout = false;
 
   constructor(
-    private cartService: CartService,
+    private cartQuery: CartQuery,
     private router: Router) {
   }
 
@@ -32,7 +33,12 @@ export class AppComponent implements OnInit{
   }
 
   getCurrentCartItems() {
-    const itemCount = this.cartService.getItems().length;
-    return itemCount > 0 ? itemCount : '';
+    return this.cartQuery.selectAll().pipe(map(cartItems => {
+      let count = 0;
+      for(const cartItem of cartItems) {
+        count += cartItem.amount;
+      }
+      return count > 0 ? count : '';
+    }));
   }
 }

@@ -2,7 +2,7 @@
   <span routerLink="" class="title">Shopping App</span>
   <span class="spacer"></span>
   <button *ngIf="!checkout" mat-icon-button (click)="openCart = !openCart">
-    <mat-icon [matBadge]="getCurrentCartItems()" matBadgeColor="accent">shopping_cart</mat-icon>
+    <mat-icon [matBadge]="getCurrentCartItems() | async" matBadgeColor="accent">shopping_cart</mat-icon>
   </button>
 </mat-toolbar>
 <mat-drawer-container>

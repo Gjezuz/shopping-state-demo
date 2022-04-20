@@ -1,9 +1,10 @@
-export interface Cart {
-  id: number | string;
+export interface CartItem {
+  itemId: number;
+  amount: number;
 }
 
-export function createCart(params: Partial<Cart>) {
+export function createCart(params: Partial<CartItem>) {
   return {
 
-  } as Cart;
+  } as CartItem;
 }

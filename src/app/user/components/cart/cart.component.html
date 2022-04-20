@@ -1,13 +1,13 @@
 <div class="container">
-  <mat-card *ngFor="let item of cartItems">
-    <div>{{item.title}} - {{item.price | currency}}</div>
-    <button mat-icon-button (click)="removeItemFromCart(item)">
+  <mat-card *ngFor="let cartItem of cartItems$ | async">
+    <div>{{getPreviewText(getCartItemDetails(cartItem.itemId) | async, cartItem.amount)}}</div>
+    <button mat-icon-button (click)="removeItemFromCart(cartItem.itemId)">
       <mat-icon class="mat-warn">delete</mat-icon>
     </button>
   </mat-card>
   <div class="cost">
     <b>Total Cost:</b>
-    <b>{{cartPrice | currency}}</b>
+    <b>{{totalCost | currency}}</b>
   </div>
   <div class="actions">
     <button mat-raised-button color="primary" [routerLink]="'/'">Continue Shopping</button>

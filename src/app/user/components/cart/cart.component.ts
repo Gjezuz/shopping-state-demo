@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {CartService} from "../../service/cart.service";
 import {Item} from "../../../items/state/item.model";
+import {CartService} from "../../state/cart.service";
+import {CartQuery} from "../../state/cart.query";
+import {map, Observable} from "rxjs";
+import {ItemsQuery} from "../../../items/state/items.query";
+import {CartItem} from "../../state/cart.model";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-cart',
@@ -9,20 +14,37 @@ import {Item} from "../../../items/state/item.model";
 })
 export class CartComponent implements OnInit {
 
-  cartItems!: Item[];
-  cartPrice!: number;
+  cartItems$!: Observable<CartItem[]>;
+  totalCost!: number
 
   constructor(
-    private cartService: CartService) {
+    private cartService: CartService,
+    private cartQuery: CartQuery,
+    private itemQuery: ItemsQuery) {
   }
 
   ngOnInit(): void {
-    this.cartItems = this.cartService.getItems();
-    this.cartPrice = this.cartService.getCostOfCart();
+    this.cartItems$ = this.cartQuery.selectAll().pipe(tap(cartItems => {
+      this.totalCost = 0;
+      for (const cartItem of cartItems) {
+        this.totalCost += this.itemQuery.getEntity(cartItem.itemId)!.price * cartItem.amount;
+      }
+    }));
   }
 
-  removeItemFromCart(item: Item) {
-    this.cartService.remove(item);
+  getCartItemDetails(itemId: number): Observable<Item | undefined> {
+    // Select could technically return undefined, but in this hardcoded case it can't. It will be ignored later
+    return this.itemQuery.selectEntity(itemId);
+  }
+
+  removeItemFromCart(itemId: number) {
+    this.cartService.removeItem(itemId);
+  }
+
+  getPreviewText(item: (Item | null | undefined), amount: number) {
+    // null and undefined are ignored because items are hardcoded and therefore always available. In productive system
+    // more elaborate Error handling would be necessary
+    return `${item!.title} - $${item!.price} x ${amount}   ($${amount * item!.price})`;
   }
 
 }

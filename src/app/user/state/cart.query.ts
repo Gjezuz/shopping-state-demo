@@ -5,7 +5,7 @@ import { CartStore, CartState } from './cart.store';
 @Injectable({ providedIn: 'root' })
 export class CartQuery extends QueryEntity<CartState> {
 
-  constructor(protected store: CartStore) {
+  constructor(store: CartStore) {
     super(store);
   }
 

@@ -1,8 +1,8 @@
 <div class="preview">
   <div class="items">
-    <mat-card *ngFor="let item of getCart()">
-      <div>{{item.title}} - {{item.price | currency}}</div>
-      <button mat-icon-button (click)="removeItemFromCart(item)">
+    <mat-card *ngFor="let cartItem of getCart() | async">
+      <div>{{getPreviewText(getCartItemDetails(cartItem.itemId) | async, cartItem.amount)}}</div>
+      <button mat-icon-button (click)="removeItemFromCart(cartItem.itemId)">
         <mat-icon class="mat-warn">delete</mat-icon>
       </button>
     </mat-card>
@@ -11,8 +11,8 @@
   <div class="button">
     <div class="cost">
       <b>Total Cost:</b>
-      <b>{{getTotalCost() | currency}}</b>
+      <b>{{getTotalCost() | async | currency}}</b>
     </div>
-    <button mat-raised-button color="accent" [disabled]="getCart().length === 0" [routerLink]="'/user/checkout'">Checkout</button>
+    <button mat-raised-button color="accent" [disabled]="getCartItemCount() === 0" [routerLink]="'/user/checkout'">Checkout</button>
   </div>
 </div>

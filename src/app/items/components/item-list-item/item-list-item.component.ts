@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CartService} from "../../../user/service/cart.service";
 import {Item} from "../../state/item.model";
+import {CartService} from "../../../user/state/cart.service";
 
 @Component({
   selector: 'app-item-list-item',
@@ -19,7 +19,7 @@ export class ItemListItemComponent implements OnInit {
   }
 
   addItemToCart() {
-    this.cartService.addItem(this.item);
+    this.cartService.addItem(this.item.id);
   }
 
 }
